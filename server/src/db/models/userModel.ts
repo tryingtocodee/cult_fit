@@ -7,10 +7,10 @@ class User extends Model<InferAttributes<User> , InferCreationAttributes<User> >
     declare username : string ;
     declare email : string ;
     declare password : string ;
-    declare phoneNumber : number ;
-    declare strike_count : number ;
-    declare no_show : Date ;
-    declare number_of_no_shows_stricks : number ;
+    declare phoneNumber? : number ;
+    declare strike_count? : number ;
+    declare no_show? : number ;
+    declare number_of_no_shows_stricks? : number ;
     declare banned_until? : Date ;
     declare type : "user" | "admin" ;
 }
@@ -22,10 +22,10 @@ User.init({
     password : {type : "STRING" , allowNull : false},
     phoneNumber : {type : "INTEGER" , defaultValue : null},
     strike_count : {type : "INTEGER" , defaultValue : null} ,
-    no_show : {type : "Date" , defaultValue : null} ,
+    no_show : {type : "INTEGER" , defaultValue : null} ,
     number_of_no_shows_stricks : {type : "Date" , defaultValue : null},
     banned_until : {type : "DATE" , defaultValue : null} ,
-    type : {type : DataTypes.ENUM("user" , "admin")}
+    type : {type : DataTypes.ENUM("user" , "admin") , defaultValue : "user"}
 } ,{
     tableName : "User",
     sequelize : sequelize,
