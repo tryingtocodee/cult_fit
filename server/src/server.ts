@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 
-app.use("/api/v1/user" , authRoutes)
+app.use("/api/v1/user" , authRoutes) // auth routes working correctly 
 
 app.listen(4000 , async ()=>{
     await sequelize.authenticate().then(()=>console.log("connected to db "))

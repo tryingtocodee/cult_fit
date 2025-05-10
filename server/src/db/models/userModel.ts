@@ -7,7 +7,7 @@ class User extends Model<InferAttributes<User> , InferCreationAttributes<User> >
     declare username : string ;
     declare email : string ;
     declare password : string ;
-    declare phoneNumber? : number ;
+    declare phonenumber? : number ;
     declare strike_count? : number ;
     declare no_show? : number ;
     declare number_of_no_shows_stricks? : number ;
@@ -20,7 +20,7 @@ User.init({
     username : {type : "STRING" , allowNull : false} ,
     email : {type : "STRING" , allowNull : false , unique : true} ,
     password : {type : "STRING" , allowNull : false},
-    phoneNumber : {type : "INTEGER" , defaultValue : null},
+    phonenumber : {type : "INTEGER" , defaultValue : null},
     strike_count : {type : "INTEGER" , defaultValue : null} ,
     no_show : {type : "INTEGER" , defaultValue : null} ,
     number_of_no_shows_stricks : {type : "Date" , defaultValue : null},
@@ -37,4 +37,3 @@ export default User
 
 
 
-//update user migration file 
