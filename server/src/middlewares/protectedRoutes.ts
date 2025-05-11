@@ -11,6 +11,7 @@ interface IUser {
     id : number ,
     username : string,
     email : string ,
+    type : string
 }
 
 declare global {
@@ -45,5 +46,21 @@ export const protectedRoutes = async(req : Request , res : Response , next : Nex
     } catch (e : any) {
         console.log("error in protected routers" , e.message)
         return res.status(500).json("Internal server error ")
+    }
+}
+
+export const adminRoutes = async (req : Request , res : Response , next : NextFunction ) : Promise<any> =>{
+    try {
+        const user = req.user 
+
+        if(user.type !== "admin"){
+            return res.status(400).json("users cannot access admin routes")
+        }
+
+        next()
+
+    } catch (e : any) {
+        console.log("error in adminRoutes" , e.message)
+        return res.status(500).json("Internal server error")
     }
 }

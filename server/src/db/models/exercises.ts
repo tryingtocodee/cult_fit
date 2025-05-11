@@ -2,6 +2,12 @@ import { CreationOptional, DataTypes, ForeignKey, InferAttributes, InferCreation
 import sequelize from "./sequelize";
 
 
+type Video = {
+    videoUrl : string ,
+    videoId : string
+}
+
+
 class Exercise extends Model <InferAttributes<Exercise> , InferCreationAttributes<Exercise> > {
     declare exercise : CreationOptional<number>
     declare classId : ForeignKey<number>
@@ -9,7 +15,7 @@ class Exercise extends Model <InferAttributes<Exercise> , InferCreationAttribute
     declare exercise_name : string 
     declare description : string 
     declare difficult : "easy" | "medium" | "difficult" 
-    declare videoUrl : string
+    declare video_asset : Video[]
 }
 
 Exercise.init({
@@ -19,7 +25,8 @@ Exercise.init({
     exercise_name : {type : "STRING" , allowNull : false} ,
     description : {type : "STRING" , allowNull : false } ,
     difficult : {type : DataTypes.ENUM('easy' , 'medium' , 'difficult')},
-    videoUrl : {type : "STRING" , defaultValue : ""}
+    video_asset : {type : DataTypes.JSON , defaultValue : []},
+   
 } ,{
     tableName : "Exercise",
     underscored : true ,

@@ -12,24 +12,38 @@ type Holiday  = {
     holiday_on : number
 }
 
+type Assets = {
+    imageId : string ,
+    imageUrl : string ,
+    videoUrl : string ,
+    videoId : string
+}
+
+
 
 
 class Gym extends Model <InferAttributes<Gym>  , InferCreationAttributes<Gym>> {
     declare gymId : CreationOptional<number> 
-    declare owner :   ForeignKey<number>
+    declare owner? :   ForeignKey<number>
+    declare gym_name : string
+    declare gym_address : string
     declare open_time : Date 
     declare close_time : Date 
-    declare banned_users : Banned_User[]
-    declare holidays : Holiday[]
+    declare banned_users? : Banned_User[]
+    declare holidays? : Holiday[]
+    declare assets : Assets[]
 }
 
 Gym.init({
     gymId : {type : "INTEGER" , autoIncrement : true , primaryKey : true},
     owner : {type :"INTEGER" , references : {model : "User" , key : "id"} },
-    open_time : {type : "INTEGER" , defaultValue : null},
-    close_time : {type : "INTEGER" , defaultValue : null} ,
+    gym_name : {type : "STRING" , allowNull : false} ,
+    gym_address : {type : "STRING" , allowNull :false , unique : true},
+    open_time : {type : "INTEGER" , allowNull :false},
+    close_time : {type : "INTEGER" , allowNull : false} ,
     banned_users : {type : DataTypes.JSON , defaultValue : []} ,
-    holidays : {type : DataTypes.JSON , defaultValue : []}
+    holidays : {type : DataTypes.JSON , defaultValue : []},
+    assets : {type :DataTypes.JSON , defaultValue : []}
 },{
     tableName : "Gym",
     sequelize : sequelize,
@@ -37,5 +51,6 @@ Gym.init({
     timestamps : true
 })
 
+export default Gym
 
 //todo create migration file 
