@@ -9,17 +9,23 @@ type Banned_User =  {
 }
 
 type Holiday  = {
-    holiday_on : number
+    holiday_on : Date
 }
 
 type Assets = {
     imageId : string ,
     imageUrl : string ,
-    videoUrl : string ,
-    videoId : string
+    videoUrl? : string,
+    videoId? : string
 }
 
+type DatesOpen = {
+    open_date : Date
+}
 
+type DatesClosed = {
+    close_date : Date
+}
 
 
 class Gym extends Model <InferAttributes<Gym>  , InferCreationAttributes<Gym>> {
@@ -32,6 +38,8 @@ class Gym extends Model <InferAttributes<Gym>  , InferCreationAttributes<Gym>> {
     declare banned_users? : Banned_User[]
     declare holidays? : Holiday[]
     declare assets : Assets[]
+    declare dates_open : DatesOpen[]
+    declare dates_close : DatesClosed[]
 }
 
 Gym.init({
@@ -39,11 +47,13 @@ Gym.init({
     owner : {type :"INTEGER" , references : {model : "User" , key : "id"} },
     gym_name : {type : "STRING" , allowNull : false} ,
     gym_address : {type : "STRING" , allowNull :false , unique : true},
-    open_time : {type : "INTEGER" , allowNull :false},
-    close_time : {type : "INTEGER" , allowNull : false} ,
+    dates_open : {type : DataTypes.DATE , allowNull : false , } , 
+    open_time : {type : DataTypes.JSON , allowNull :false , defaultValue : []},
+    close_time : {type : DataTypes.TIME , allowNull : false} ,
     banned_users : {type : DataTypes.JSON , defaultValue : []} ,
     holidays : {type : DataTypes.JSON , defaultValue : []},
-    assets : {type :DataTypes.JSON , defaultValue : []}
+    assets : {type :DataTypes.JSON , defaultValue : []} ,
+    dates_close : {type :DataTypes.JSON , defaultValue : []}
 },{
     tableName : "Gym",
     sequelize : sequelize,

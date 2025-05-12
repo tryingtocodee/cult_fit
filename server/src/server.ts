@@ -19,7 +19,7 @@ app.use(cookieParser())
 
 
 app.use("/api/v1/user" , authRoutes) // auth routes tested , working correctly 
-app.use("/api/v1/center-routes" , centerRoutes )
+app.use("/api/v1/center-routes" , centerRoutes ) // complicated go through logic twice and test twice 
 
 app.listen(4000 , async ()=>{
     await sequelize.authenticate().then(()=>console.log("connected to db "))

@@ -5,14 +5,16 @@ interface FormProps {
     title: string,
     input: IInput[],
     button_text: string,
-    onSubmit: (e : FormEvent) => void
+    onSubmit: (e : FormEvent) => void,
+    
 }
 
 interface IInput {
     label: string,
     placeholder: string,
-    value: string,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    value: string | string[],
+    onChange: (e: React.ChangeEvent<HTMLInputElement>)  => void ,
+    type : string
 }
 
 const defaultStyle = "flex flex-col items-center justify-center w-96 p-8 bg-blue-200 rounded-lg "
@@ -29,7 +31,7 @@ export function GenericForm(props: FormProps) {
                 {props.input.map((u) => (
                     <div className="mb-3 w-full">
                         <div className="text-lg">{u.label}</div>
-                        <input type="text" placeholder={u.placeholder} value={u.value} onChange={u.onChange} className={`${inputStyle}`}/>
+                        <input type={u.type} placeholder={u.placeholder} value={u.value} onChange={u.onChange} className={`${inputStyle}`}/>
                     </div>
                 ))}
             </div>

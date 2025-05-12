@@ -35,5 +35,5 @@ Class_Booking.init({
     timestamps : true
 })
 
-
+export default Class_Booking
 //todo create migration file 

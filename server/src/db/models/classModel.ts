@@ -22,7 +22,8 @@ Class.init({
     classId : {type : "INTEGER" , autoIncrement : true , primaryKey : true} ,
     class_name : {type :"STRING" , defaultValue : "" , allowNull : false} ,
     gymId : {type : "INTEGER" , references : {model : "GYM" , key : "gymId"} } ,
-    active : {type : DataTypes.JSON , defaultValue : []}
+    active : {type : DataTypes.JSON , defaultValue : []},
+    
 },{
     tableName : "Class",
     sequelize : sequelize,
@@ -30,5 +31,7 @@ Class.init({
     timestamps : true
 })
 
+
+export default Class
 
 //todo create migration file 

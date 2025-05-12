@@ -12,19 +12,22 @@ export function Signup () {
             label : "Username",
             placeholder : "add username" ,
             value : username ,
-            onChange : (e : React.ChangeEvent<HTMLInputElement>)=>setUsername(e.target.value)
+            onChange : (e : React.ChangeEvent<HTMLInputElement>)=>setUsername(e.target.value),
+            type : "text"
         },
          {
             label : "Email",
             placeholder : "add email" ,
             value : email ,
-            onChange : (e : React.ChangeEvent<HTMLInputElement>)=>setEmail(e.target.value)
+            onChange : (e : React.ChangeEvent<HTMLInputElement>)=>setEmail(e.target.value),
+            type : "text"
         },
          {
             label : "Password",
             placeholder : "add password" ,
             value : password ,
-            onChange : (e : React.ChangeEvent<HTMLInputElement>)=>setPassword(e.target.value)
+            onChange : (e : React.ChangeEvent<HTMLInputElement>)=>setPassword(e.target.value),
+            type : "text"
         },
     ]
     function handleSubmit(e : FormEvent) {

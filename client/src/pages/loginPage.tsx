@@ -11,13 +11,15 @@ export function Login () {
             label : "Email",
             placeholder : "add email" ,
             value : email ,
-            onChange : (e : React.ChangeEvent<HTMLInputElement>)=>setEmail(e.target.value)
+            onChange : (e : React.ChangeEvent<HTMLInputElement>)=>setEmail(e.target.value),
+            type : "text"
         },
          {
             label : "Password",
             placeholder : "add password" ,
             value : password ,
-            onChange : (e : React.ChangeEvent<HTMLInputElement>)=>setPassword(e.target.value)
+            onChange : (e : React.ChangeEvent<HTMLInputElement>)=>setPassword(e.target.value),
+            type : "text"
         },
     ]
     function handleSubmit(e : FormEvent) {
@@ -26,7 +28,7 @@ export function Login () {
 
     return (
     <div className="flex items-center justify-center h-screen">
-        <GenericForm  title="Login" button_text="Submit" input={inputFields} onSubmit={handleSubmit}/>
+        <GenericForm   title="Login" button_text="Submit" input={inputFields} onSubmit={handleSubmit}/>
     </div>
     ) 
 }
