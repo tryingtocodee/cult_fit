@@ -1,5 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { GenericForm } from "../components/genericForm";
+import axios from "axios";
+
 
 export function Login () {
     const [email , setEmail] = useState("")
@@ -22,8 +24,17 @@ export function Login () {
             type : "text"
         },
     ]
-    function handleSubmit(e : FormEvent) {
+    async function handleSubmit(e : FormEvent) {
         e.preventDefault()
+        const res = await axios.post("http://localhost:4000/api/v1/user/login" , {email , password} ,  {withCredentials : true })
+        // const res = await fetch("http://localhost:4000/api/v1/user/login" , {
+        //     method : "POST" ,
+        //     headers : {"Content-Type" : "application/json"},
+        //     body : JSON.stringify({email , password}),
+        //     credentials : "include"
+        // })
+        console.log(res)
+        localStorage.setItem("users" , JSON.stringify(res.data.user) )
     }
 
     return (

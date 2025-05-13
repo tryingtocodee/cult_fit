@@ -1,19 +1,29 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { GenericForm } from "../components/genericForm";
-
+import axios from "axios";
 
 export function CreateGym() {
     const [gymName, setGymName] = useState("")
     const [gymAddress, setGymAddress] = useState("")
     const [openTime, setOpenTime] = useState("")
     const [closeTime, setCloseTime] = useState("")
-
+    const [userId , setUserId] = useState(null)
     //const [image, setImage] = useState<File[]>([])
     const [imageBase64, setImageBase64] = useState<string[]>([])
 
     //const [video, setVideo] = useState<string[]>([])
     const [videoBase64, setVideoBase64] = useState<string[]>([])
+    
 
+
+    useEffect(() => {
+        const user = localStorage.getItem("users")
+        if (user) {
+            const parsed = JSON.parse(user)
+             setUserId(parsed.userId)
+        }
+
+    }, [])
 
 
 
@@ -62,11 +72,13 @@ export function CreateGym() {
     ]
 
 
-    function handleSubmit(e: FormEvent) {
+    async function handleSubmit(e: FormEvent) {
         e.preventDefault()
-        console.log("submitting data", {
-            imageBase64
-        })
+        const res = await axios.post("http://localhost:4000/api/v1/center-routes/create",
+            { gym_name: gymName, gym_address: gymAddress, close_time: closeTime, open_time: openTime, images: imageBase64, owner : userId },
+            { withCredentials: true }
+        )
+        console.log(res)
     }
 
     async function handleImageSubmit(e: React.ChangeEvent<HTMLInputElement>) {
@@ -137,7 +149,7 @@ export function CreateGym() {
             <div>
                 <div>uploaded videos</div>
                 <div className="flex flex-row gap-5 mt-3">
-                    {videoBase64.map((src , index)=>(
+                    {videoBase64.map((src, index) => (
                         <video className="w-96 h-96" controls src={src} key={index}></video>
                     ))}
                 </div>

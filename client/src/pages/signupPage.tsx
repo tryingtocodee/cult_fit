@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { GenericForm } from "../components/genericForm";
+import axios from "axios"
 
 export function Signup () {
     const [username , setUsername] = useState("")
@@ -30,8 +31,13 @@ export function Signup () {
             type : "text"
         },
     ]
-    function handleSubmit(e : FormEvent) {
+    async function handleSubmit(e : FormEvent) {
         e.preventDefault()
+        const res = await axios.post("http://localhost:4000/api/v1/user/signup" , 
+            {username , email , password},
+            {withCredentials : true}
+        )
+        localStorage.setItem("users" , JSON.stringify(res.data.user))
     }
 
     return (
