@@ -7,6 +7,7 @@ export const setCookie = (token : string , res : Response) => {
             httpOnly : true ,
             sameSite : "strict"
         })
+     
     } catch (error) {
         console.log("error in setCookie ")
         return res.status(500).json("Internal server error")      

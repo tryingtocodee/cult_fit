@@ -33,7 +33,7 @@ class Gym extends Model <InferAttributes<Gym>  , InferCreationAttributes<Gym>> {
     declare owner? :   ForeignKey<number>
     declare gym_name : string
     declare gym_address : string
-    declare open_time : Date 
+    declare open_time : Date  // should be time 
     declare close_time : Date 
     declare banned_users? : Banned_User[]
     declare holidays? : Holiday[]
@@ -47,8 +47,8 @@ Gym.init({
     owner : {type :"INTEGER" , references : {model : "User" , key : "id"} },
     gym_name : {type : "STRING" , allowNull : false} ,
     gym_address : {type : "STRING" , allowNull :false , unique : true},
-    dates_open : {type : DataTypes.DATE , allowNull : false , } , 
-    open_time : {type : DataTypes.JSON , allowNull :false , defaultValue : []},
+    dates_open : {type : DataTypes.JSON , defaultValue : [] } , 
+    open_time : {type : DataTypes.TIME , allowNull :false },
     close_time : {type : DataTypes.TIME , allowNull : false} ,
     banned_users : {type : DataTypes.JSON , defaultValue : []} ,
     holidays : {type : DataTypes.JSON , defaultValue : []},
@@ -57,7 +57,6 @@ Gym.init({
 },{
     tableName : "Gym",
     sequelize : sequelize,
-    underscored : true,
     timestamps : true
 })
 

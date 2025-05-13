@@ -11,19 +11,16 @@ interface ImageType {
 
 export const createCenter = async (req: Request, res: Response): Promise<any> => {
     try {
-        const { gym_name, gym_address, open_time, close_time, images, video, dates_open, dates_close } = req.body
-
+        const {owner , gym_name, gym_address, open_time, close_time, images, video, dates_open, dates_close } = req.body
+        console.log("owner" , owner)
         //todo add zod validateion 
-
-        const gym = await Gym.findOne({ where: { gym_name: gym_name, gym_address: gym_address } })
-
+        const gym = await Gym.findOne({ where: { gym_name: gym_name , gym_address: gym_address } })       
+        
         if (gym) {
             return res.status(411).json("gym with this name and address already exists")
         }
 
         const gymAddressTake = await Gym.findOne({ where: { gym_address: gym_address } })
-
-        
 
         if (gymAddressTake) {
             return res.status(411).json("This address is already used . cannot added two gyms at same address")
@@ -46,6 +43,8 @@ export const createCenter = async (req: Request, res: Response): Promise<any> =>
         
         const uploadedImages = await Promise.all(image_response)
 
+   
+
         // const video_response = video.map(async(vid : any)=>{
         //     const uploadVideo = await cloudinary.uploader.upload(vid, { resource_type: 'video' })
 
@@ -62,6 +61,7 @@ export const createCenter = async (req: Request, res: Response): Promise<any> =>
         }))
 
         const newGym = new Gym({
+            owner : owner,
             gym_name: gym_name,
             gym_address: gym_address,
             open_time: open_time,

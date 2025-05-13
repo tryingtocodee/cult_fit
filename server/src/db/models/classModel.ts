@@ -20,7 +20,7 @@ class Class extends Model <InferAttributes<Class> , InferCreationAttributes<Clas
 
 Class.init({
     classId : {type : "INTEGER" , autoIncrement : true , primaryKey : true} ,
-    class_name : {type :"STRING" , defaultValue : "" , allowNull : false} ,
+    class_name : {type :"STRING" , allowNull : false} ,
     gymId : {type : "INTEGER" , references : {model : "GYM" , key : "gymId"} } ,
     active : {type : DataTypes.JSON , defaultValue : []},
     

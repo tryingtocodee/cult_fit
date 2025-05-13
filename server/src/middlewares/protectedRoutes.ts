@@ -25,7 +25,8 @@ declare global {
 export const protectedRoutes = async(req : Request , res : Response , next : NextFunction) : Promise<any> => {
     try {
         const token = req.cookies.token
-
+       
+       
         if(!token){
             return res.status(411).json("no token found")
         }
